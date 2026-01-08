@@ -42,6 +42,17 @@ In this step, we will focus on the **internal configuration of the system**. We 
 *Follow ALL sections below after completing the previous reading.*
 
 ## 1. Preparation <a name="preparation"></a>
+**1.1 - Download the ISO: _Go to the_ [official Arch Linux website](https://archlinux.org/download/) _and download the installation file (ISO)_**. _He is the "installer" of the system._
 
-**1.1 - __Download the ISO:__ Go to the [official Arch Linux website](https://archlinux.org/download/) and download the installation file (ISO)**. He is the "installer" of the system.
+**1.2 - Pendrive Backup: _Save ALL your USB stick files elsewhere. The next step will erase everything in it._**
 
+**1.3 - Download Ventoy: _Download the program from_ [Ventoy's official website](https://www.ventoy.net/en/download.html).** _It is the tool that prepares the USB stick so that the computer can start the Arch Linux installer._
+
+**1.4 - Create the Installation Pendrive: _Just follow this_ [3 minute tutorial](https://www.youtube.com/watch?v=3HVAM1M3fQU) _to create the bootable USB stick._**
+> If you have finished these stages, go to step 2.
+
+## 2. BIOS Configuration <a name="bios"></a>
+**2.1 - Access the BIOS/UEFI:** _Now, let's **restart the computer. Once it starts turning on, keep pressing the setup key (usually F2 or Delete)** until it opens a different screen._
+
+**2.2 - Boot Order:** _Within that screen, **look for the Boot option and change the order so that your USB stick is first so that it is read first. Save the changes and exit;** the computer will restart and load the Arch Linux installer._ 
+> If you have finished these stages, go to step 2.
