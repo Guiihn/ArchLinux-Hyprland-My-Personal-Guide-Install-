@@ -43,4 +43,4 @@ In this step, we will focus on the **internal configuration of the system**. We 
 
 ## 1. Preparation <a name="preparation"></a>
 
-1.1 - Download the official iso from the [Arch Linux website](https://archlinux.org/download/)
+1.1 - Download the official iso from the [Arch website](https://archlinux.org/download/)
