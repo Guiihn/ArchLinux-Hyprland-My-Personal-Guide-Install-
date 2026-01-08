@@ -14,7 +14,7 @@ In this step, we will focus on preparing the environment for **downloading the I
 </details>
 
 <details>
-    <summary><b>3. Basic configuration for Live Environment </b></summary>
+    <summary><b>3. Basic Live Environment Setup </b></summary>
 
 In this stage we will do some **basic configurations in the Live environment**. These settings will be to **configure keyboard layout, internet, environment clock and keyring correction.**
 </details>
@@ -56,3 +56,10 @@ In this step, we will focus on the **internal configuration of the system**. We 
 
 **2.2 - Boot Order:** _Within that screen, **look for the Boot option and change the order so that your USB stick is first so that it is read first. Save the changes and exit;** the computer will restart and load the Arch Linux installer._ 
 > If you have finished these stages, go to step 3.
+
+## 3. Basic configuration of the Live Environment <a name="live"></a>
+> If the terminal source is small use the command `setfont ter-132b` to increase the size of the letters.
+
+**3.1 - Configure Keyboard:** _The first thing to do is **set up the keyboard so that the keys you press come out correctly on the screen (like the / or - sign). If your keyboard has the Ç key, it is the Brazilian standard (br-abnt2). If he doesn't, he's usually the American (us).**_ _Enter the command that **corresponds to your keyboard model using the command:**_ **`loadkeys (your model)`. _That is_ `loadkeys br-abnt2` _or_ `loadkeys us`.**
+
+> If you connect your computer to the internet via cable, you don't need to do this next step.
