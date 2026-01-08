@@ -29,5 +29,11 @@ In this step, the focus will be on **organizing your disk** (HD or SSD). Let's *
 <details>
     <summary><b>5. Installation of the base </b></summary>
 
-Here we will **update the mirrors and also use ['pacstrap'] to install the Linux Kernel** and essential packages. Finally, let's **generate the fstab file with 'genfstab' to remember and automatically mount the partitions** that you had previously mounted in step 4.
+Here we will **update the mirrors and also use `pacstrap` to install the Linux Kernel** and essential packages. Finally, let's **generate the fstab file with `genfstab` to remember and automatically mount the partitions** that you had previously mounted in step 4.
+</details>
+
+<details>
+    <summary><b>6. Initial system settings </b></summary>
+
+
 </details>
