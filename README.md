@@ -55,4 +55,4 @@ In this step, we will focus on the **internal configuration of the system**. We 
 **2.1 - Access the BIOS/UEFI:** _Now, let's **restart the computer. Once it starts turning on, keep pressing the setup key (usually F2 or Delete)** until it opens a different screen._
 
 **2.2 - Boot Order:** _Within that screen, **look for the Boot option and change the order so that your USB stick is first so that it is read first. Save the changes and exit;** the computer will restart and load the Arch Linux installer._ 
-> If you have finished these stages, go to step 2.
+> If you have finished these stages, go to step 3.
