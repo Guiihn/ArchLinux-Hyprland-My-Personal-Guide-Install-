@@ -1,7 +1,6 @@
 # **My Install Guide for Arch Linux & Hyprland**
-*This is my personal guide to installing this system.*
-
-## *These will be the paths we will follow:*
+### *This is my personal guide to installing this system.*
+### *These will be the paths we will follow:*
 <details>
     <summary><b>1. Preparation </b></summary>
 
@@ -35,5 +34,13 @@ Here we will **update the mirrors and also use `pacstrap` to install the Linux K
 <details>
     <summary><b>6. Initial system settings </b></summary>
 
-In this step, we will focus on the **internal configuration of the system**. We will **activate an important library called multilib, configure the time zone, location and language, download and configure the bootloader** (sGRUB) so that the system starts correctly, and finally, we will **perform user creation with administrator privileges**.
-</details>
+In this step, we will focus on the **internal configuration of the system**. We will **activate an important library called multilib, configure the time zone, location and language, download and configure the bootloader** (GRUB) so that the system starts correctly, and finally, we will **perform user creation with administrator privileges**.
+</details> 
+
+---
+# 🛠️ Step-by-Step Installation
+*Siga TODAS as seções abaixo após concluir a leitura anterior.*
+
+## 1. Preparation <a name="preparation"></a>
+
+1.1 - Download the iso from the [official Arch Linux website](https://archlinux.org/download/)
