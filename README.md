@@ -5,4 +5,29 @@
 <details>
     <summary><b>1. Preparation </b></summary>
 
-In this step, we will focus on preparing the environment for downloading the ISO, formatting the USB stick, downloading Ventoy (the program that will be used to create the bootable USB stick) and then creating the bootable USB stick.
+In this step, we will focus on preparing the environment for **downloading the ISO**, **formatting the USB stick**, **downloading Ventoy** (the program that will be **used to create the bootable USB stick**) and then **creating the bootable USB stick**.
+</details>
+
+<details>
+    <summary><b>2. BIOS/UEFI Setup </b></summary>
+
+**We will put the bootable USB stick to start first.**
+</details>
+
+<details>
+    <summary><b>3. Basic configuration for Live Environment </b></summary>
+
+In this stage we will do some **basic configurations in the Live environment**. These settings will be to **configure the keyboard layout, internet and environment clock.**
+</details>
+
+<details>
+    <summary><b>4. Disk Partitioning </b></summary>
+
+In this step, the focus will be on **organizing your disk** (HD or SSD). Let's **decide how the space will be divided, defining the boot partition for the system to start, the swap partition** (auxiliary memory) to help the computer when it is overloaded, **and the main partition** where all the files and the operating system will be stored.
+</details>
+
+<details>
+    <summary><b>5. Installation of the base </b></summary>
+
+We will use **'pacstrap' to install the Linux Kernel** and essential packages.
+</details>
