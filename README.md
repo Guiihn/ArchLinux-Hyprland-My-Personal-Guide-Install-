@@ -4,7 +4,7 @@
 <details>
     <summary><b>1. Preparation </b></summary>
 
-In this step, we will focus on preparing the environment for **downloading the ISO**, **formatting the USB stick**, **downloading Ventoy** (the program that will be **used to create the bootable USB stick**) and then **creating the bootable USB stick**.
+In this step, we will focus on preparing the environment for **downloading the ISO**, **prepare your bootable USB stick**, **downloading Ventoy** (the program that will be **used to create the bootable USB stick**) and then **creating the bootable USB stick**.
 </details>
 
 <details>
@@ -39,8 +39,9 @@ In this step, we will focus on the **internal configuration of the system**. We 
 
 ---
 # 🛠️ Step-by-Step Installation
-*Siga TODAS as seções abaixo após concluir a leitura anterior.*
+*Follow ALL sections below after completing the previous reading.*
 
 ## 1. Preparation <a name="preparation"></a>
 
-1.1 - Download the official iso from the [Arch website](https://archlinux.org/download/)
+**1.1 - __Download the ISO:__ Go to the [official Arch Linux website](https://archlinux.org/download/) and download the installation file (ISO)**. He is the "installer" of the system.
+
