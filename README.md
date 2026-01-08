@@ -17,7 +17,7 @@ In this step, we will focus on preparing the environment for **downloading the I
 <details>
     <summary><b>3. Basic configuration for Live Environment </b></summary>
 
-In this stage we will do some **basic configurations in the Live environment**. These settings will be to **configure the keyboard layout, internet and environment clock.**
+In this stage we will do some **basic configurations in the Live environment**. These settings will be to **configure keyboard layout, internet, environment clock and keyring correction.**
 </details>
 
 <details>
@@ -29,5 +29,5 @@ In this step, the focus will be on **organizing your disk** (HD or SSD). Let's *
 <details>
     <summary><b>5. Installation of the base </b></summary>
 
-We will use **'pacstrap' to install the Linux Kernel** and essential packages.
+Here we will **update the mirrors and also use ['pacstrap'] to install the Linux Kernel** and essential packages. Finally, let's **generate the fstab file with 'genfstab' to remember and automatically mount the partitions** that you had previously mounted in step 4.
 </details>
