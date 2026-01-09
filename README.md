@@ -73,7 +73,7 @@ In this step, we will focus on the **internal configuration of the system**. We 
 > Test the connection using `ping -c 3 google.com`, **if it returns in milliseconds, it will be connected, and can skip step 3.2.1.** Otherwise you may have a DNS issue and you can resolve it below.
 
 <details>
-    <summary><i>3.2.1 DNS Resolution</i></summary>
+    <summary><i>3.2.1 - DNS Resolution</i></summary>
 
 _To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit nano, press CTRL+X.**_
 > Test again using `ping -c 3 google.com`, if it returns in milliseconds, everything is fine.
@@ -83,3 +83,12 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
 **3.4 - Keyring Correction:** _First, we need to_ **_remove the old keyrings using the command_ `rm -rf/etc/pacman.d/gnupg`.** _Now, let's_ **_start the new keyrings with the_ `pacman-key --init` _and_ `pacman-key --populate archlinux` _commands to load these keys. Then use the command_ `pacman -Sy archlinux-keyring --noconfirm` _to update the keyring package_**_, downloading it directly from Arch servers._
 > If you have finished these stages, go to step 4.
+
+## 4. Disk Partitioning <a name="partitioning"></a>
+> **Before we partition your disk, we need to know your computer starts in UEFI mode or BIOS (Legacy) mode. To do this, we will use the command `ls/sys/firmware/efi/` to know if the system is in UEFI mode. If the command returns some folder names, UEFI mode is active. If it doesn't return anything, it's in BIOS (Legacy). With this data you can proceed to the tutorial regarding its initialization mode.**
+<details>
+    <summary><i>4.1 - UEFI</i></summary>
+</details>
+<details>
+    <summary><i>4.2 - BIOS</i></summary>
+</details>
