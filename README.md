@@ -16,7 +16,7 @@ In this step, we will focus on preparing the environment for **downloading the I
 <details>
     <summary><b>3. Basic Live Environment Setup </b></summary>
 
-In this stage we will do some **basic configurations in the Live environment**. These settings will be to **configure keyboard layout, internet, environment clock and keyring correction.**
+In this stage we will do some **basic configurations in the Live environment**. These settings will be to **configure keyboard layout, internet, synchronize the clock and keyring correction.**
 </details>
 
 <details>
@@ -66,17 +66,20 @@ In this step, we will focus on the **internal configuration of the system**. We 
 
 > If you connect your computer to the internet via cable, you don't need to do this next step.
 
-**3.2 - Internet connection: _If you are not using network cable, enter the command below to open the Wi-Fi configurator named IWD:_ `iwctl`.** _When you type this command, you will see that the command line will have changed and entered the program._ **_We need to identify the name of your network card with the_ `device list` _command; something like wlan0 or something similar should appear._** _Next,_ **_we will use the commands_ `station [your device name] scan` _and_ `station [your device name] get-networks` _to scan and display the found networks, and then the command_ `station [your device name] connect [your internet name]` to connect, and then enter the password. After this, type `exit` to exit the program.**
+**3.2 - Internet Connection: _If you are not using network cable, enter the command below to open the Wi-Fi configurator named IWD:_ `iwctl`.** _When you type this command, you will see that the command line will have changed and entered the program._ **_We need to identify the name of your network card with the_ `device list` _command; something like wlan0 or something similar should appear._** _Next,_ **_we will use the commands_ `station [your device name] scan` _and_ `station [your device name] get-networks` _to scan and display the found networks, and then the command_ `station [your device name] connect [your internet name]` to connect, and then enter the password. After this, type `exit` to exit the program.**
 
 > **Examples: `station wlan0 scan`, `station wla0 get-networks` _and_ `station wlan0 connect wifi01`.**
 
 > Test the connection using `ping -c 3 google.com`, **if it returns in milliseconds, it will be connected, and can skip step 3.2.1.** Otherwise you may have a DNS issue and you can resolve it below.
 
 <details>
-    <summary><b>3.2.1 DNS Resolution </b></summary>
+    <summary><i>3.2.1 DNS Resolution</i></summary>
 
-To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit nano, press CTRL+X.**
+_To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit nano, press CTRL+X.**_
 > Test again using `ping -c 3 google.com`, if it returns in milliseconds, everything is fine.
 </details>
 
-**3.3 - Environment clock: Para que a instalação ocorra corretamente, precisamos sincronizar o relogio o environment live ao horário padrão global, para isso utilizaremos apenas o comando `timedatectl set-ntp true`
+**3.3 - Environment Clock: _For the installation to go properly, we need to synchronize the clock and live environment with global standard time, for this we will only use the_ `timedatectl set-ntp true` _command._**
+
+**3.4 - Keyring Correction:** _First, we need to_ **_remove the old keyrings using the command_ `rm -rf/etc/pacman.d/gnupg`.** _Now, let's_ **_start the new keyrings with the_ `pacman-key --init` _and_ `pacman-key --populate archlinux` _commands to load these keys. Then use the command_ `pacman -Sy archlinux-keyring --noconfirm` _to update the keyring package_**_, downloading it directly from Arch servers._
+> If you have finished these stages, go to step 4.
