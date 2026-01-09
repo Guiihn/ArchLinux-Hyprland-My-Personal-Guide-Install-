@@ -58,14 +58,25 @@ In this step, we will focus on the **internal configuration of the system**. We 
 > If you have finished these stages, go to step 3.
 
 ## 3. Basic configuration of the Live Environment <a name="live"></a>
+> **IMPORTANT: It is common that when executing valid commands, the terminal does not return any confirmation or hit messages. On Linux, the default is for the system to only display messages if an error occurs. If you run a command and the bottom line just appears empty for you to type again, it means the command worked.** 
+
 > If the terminal source is small use the command `setfont ter-132b` to increase the size of the letters.
 
 **3.1 - Configure Keyboard:** _The first thing to do is **set up the keyboard so that the keys you press come out correctly on the screen (like the / or - sign). If your keyboard has the Ç key, it is the Brazilian standard (br-abnt2). If he doesn't, he's usually the American (us).**_ _Enter the command that **corresponds to your keyboard model using the command:**_ **`loadkeys (your model)`. _That is_ `loadkeys br-abnt2` _or_ `loadkeys us`.**
 
 > If you connect your computer to the internet via cable, you don't need to do this next step.
 
-**3.2 - Internet connection: _If you are not using network cable, enter the command below to open the Wi-Fi configurator named IWD:_ `iwctl`.** _When you type this command, you will see that the command line will have changed and entered the program._ **_We need to identify the name of your network card with the_ `device list` _command; something like wlan0 or something similar should appear._** _Next,_ **_we will use the commands_ `station [your device name] scan` _and_ `station [your device name] get-networks` _to scan and display the found networks, and then the command_ `station [your device name] connect [your internet name]` to connect, and then enter the password.**
+**3.2 - Internet connection: _If you are not using network cable, enter the command below to open the Wi-Fi configurator named IWD:_ `iwctl`.** _When you type this command, you will see that the command line will have changed and entered the program._ **_We need to identify the name of your network card with the_ `device list` _command; something like wlan0 or something similar should appear._** _Next,_ **_we will use the commands_ `station [your device name] scan` _and_ `station [your device name] get-networks` _to scan and display the found networks, and then the command_ `station [your device name] connect [your internet name]` to connect, and then enter the password. After this, type `exit` to exit the program.**
 
 > **Examples: `station wlan0 scan`, `station wla0 get-networks` _and_ `station wlan0 connect wifi01`.**
 
->After this, you can type `exit` to exit the program.
+> Test the connection using `ping -c 3 google.com`, **if it returns in milliseconds, it will be connected, and can skip step 3.2.1.** Otherwise you may have a DNS issue and you can resolve it below.
+
+<details>
+    <summary><b>3.2.1 DNS Resolution </b></summary>
+
+To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit nano, press CTRL+X.**
+> Test again using `ping -c 3 google.com`, if it returns in milliseconds, everything is fine.
+</details>
+
+**3.3 - Environment clock: Para que a instalação ocorra corretamente, precisamos sincronizar o relogio o environment live ao horário padrão global, para isso utilizaremos apenas o comando `timedatectl set-ntp true`
