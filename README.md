@@ -63,3 +63,9 @@ In this step, we will focus on the **internal configuration of the system**. We 
 **3.1 - Configure Keyboard:** _The first thing to do is **set up the keyboard so that the keys you press come out correctly on the screen (like the / or - sign). If your keyboard has the Ç key, it is the Brazilian standard (br-abnt2). If he doesn't, he's usually the American (us).**_ _Enter the command that **corresponds to your keyboard model using the command:**_ **`loadkeys (your model)`. _That is_ `loadkeys br-abnt2` _or_ `loadkeys us`.**
 
 > If you connect your computer to the internet via cable, you don't need to do this next step.
+
+**3.2 - Internet connection: _If you are not using network cable, enter the command below to open the Wi-Fi configurator named IWD:_ `iwctl`.** _When you type this command, you will see that the command line will have changed and entered the program._ **_We need to identify the name of your network card with the_ `device list` _command; something like wlan0 or something similar should appear._** _Next,_ **_we will use the commands_ `station [your device name] scan` _and_ `station [your device name] get-networks` _to scan and display the found networks, and then the command_ `station [your device name] connect [your internet name]` to connect, and then enter the password.**
+
+> **Examples: `station wlan0 scan`, `station wla0 get-networks` _and_ `station wlan0 connect wifi01`.**
+
+>After this, you can type `exit` to exit the program.
