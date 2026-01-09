@@ -85,7 +85,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 > If you have finished these stages, go to step 4.
 
 ## 4. Disk Partitioning <a name="partitioning"></a>
-> **Before we partition your disk, we need to know your computer starts in UEFI mode or BIOS (Legacy) mode. To do this, we will use the command `ls/sys/firmware/efi/` to know if the system is in UEFI mode. If the command returns some folder names, UEFI mode is active. If it doesn't return anything, it's in BIOS (Legacy). With this data you can proceed to the tutorial regarding its initialization mode.**
+**Before we partition your disk, we need to know your computer starts in UEFI mode or BIOS (Legacy) mode. To do this, we will use the command `ls/sys/firmware/efi/` to know if the system is in UEFI mode. If the command returns some folder names, UEFI mode is active. If it doesn't return anything, it's in BIOS (Legacy). With this data you can proceed to the tutorial regarding its initialization mode.**
 <details>
     <summary><i>4.1 - UEFI</i></summary>
 </details>
