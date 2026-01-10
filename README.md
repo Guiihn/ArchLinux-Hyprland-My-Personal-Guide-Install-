@@ -200,3 +200,10 @@ _Then,_ **_install grub on the partition using the command_ `grub-install --targ
 _Next,_ **_to create your user, we will use the command_ `useradd -m -g wheel -s/bin/bash [your_user]`** _— in my case, the command is_ `useradd -m -g wheel -s/bin/bash guihnxz`_. Finally,_ **_to assign a password to this new user, use the command_ `passwd [your_user]`**_, which in my example would be_ `passwd guihnxz`_, remembering again to define a different combination than the one used for_ `root`_._
 
 _Now,_ **_use the command_ `EDITOR=nano visudo` _to open the_ `sudoers` _file through the NANO editor (note to write EDITOR in capital letters). Use the shortcut CTRL+F to search for the_ `wheel`_term and remove the_ `#` _character from the line_ `#%wheel ALL=(ALL:ALL) ALL`_._** _This change will allow your user to use the sudo command to gain administrator privileges by requesting the user's password before each run._
+
+
+## 7 - Activate Services and Finish the Installation <a name="final"></a>
+**1 - Activate Services:** _For the system to operate correctly after restarting, it is necessary to enable two essential services so that they start automatically. First,_ **_activate the Network Manager service with the command_ `systemctl enable NetworkManager`**_, ensuring that Wi-Fi can be configured properly. Then,_ **_enable the Ly service_** _(the Display Manager installed in step 6.1)_ **_using the command_ `systemctl enable ly.service`_, so that the login interface is loaded instead of just the default terminal._**
+
+# The End
+## That's it, your system is usable and has the basics set up for you to customize as you wish. It wasn't that bad, was it? lol
