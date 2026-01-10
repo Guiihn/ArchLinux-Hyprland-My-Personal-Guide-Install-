@@ -34,11 +34,11 @@ Here we will **update the mirrors and also use `pacstrap` to install the Linux K
 <details>
     <summary><b>6. Initial System Settings </b></summary>
 
-In this step, we will focus on the **internal configuration of the system**. We will **activate an important library called multilib, configure the time zone, location and language, download and configure the bootloader** (GRUB) so that the bootloader starts correctly, and finally, we will **perform user creation with administrator privileges**.
+In this step, we will focus on the **internal configuration of the system**. We will **activate an important library called multilib, configure the time zone, location, language and hostname, download and configure the bootloader** (GRUB) so that it starts correctly, and finally, we will **perform user creation with administrator privileges**.
 </details> 
 
 <details>
-    <summary><b>7. Activate services and finish the installation </b></summary>
+    <summary><b>7. Activate Services and Finish the Installation </b></summary>
 
 Finally, we will **activate services so that the system starts correctly** and we will **disassemble the live environment and restart the machine.**
 </details> 
@@ -81,7 +81,7 @@ Finally, we will **activate services so that the system starts correctly** and w
 <details>
     <summary><i>DNS Resolution</i></summary>
 
-_To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit nano, press CTRL+X.**_
+_To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X.**_
 > Test again using `ping -c 3 google.com`, if it returns in milliseconds, everything is fine.
 </details>
 
@@ -101,7 +101,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
 **3 - Split the Device: _Now, go to_ `New`_, a message will appear asking you to enter the desired size, write 1G_**_, press Enter,_ **_select_ `Type` _and choose the_ `EFI System` _option_** _(this will be the boot partition). Then,_ **_select_ `Free Space` _again using the down arrow, press_ `New` _again, and add a size for Swap_** _(auxiliary memory in case RAM runs out) — it's recommended to use the same amount of gigabytes of your RAM — press Enter,_ **_go to_ `Type`_, and select_ `Linux Swap`_._** _Then,_ **_select_ `Free Space` _again, click_ `New`_, select all remaining space and leave it in_ `Linux filesystem`_._** _As you do all this,_ **_go to_ `Write`**_, press Enter, and_ **_type_ `yes` _to save the changes_**_; to exit, simply_ **_go to_ `Quit` _and press Enter._**
 
-**4 - Prepare the Partitions: _Use_ `mkfs.ext4/dev/sda3` _to format the system root partition in EXT4. Also use `mkfs.fat -F 32/dev/sda1` to format the boot partition. The command_ `mkswap/dev/sda2` _to format the partition_ `sda2` _as swap and the command_ `swapon/dev/sda2` _to activate swap._**
+**4 - Prepare the Partitions: _Use_ `mkfs.ext4/dev/sda3` _to format the system root partition in EXT4. Also use `mkfs.fat -F 32/dev/sda1` to format the boot partition (If you are going to do dualboot, do not do this formatting). The command_ `mkswap/dev/sda2` _to format the partition_ `sda2` _as swap and the command_ `swapon/dev/sda2` _to activate swap._**
 
 **5 - Assembly: _Use the command_ `mount/dev/[your device]3 /mnt` _— i.e._ `mount/dev/sda3 /mnt` _— to mount the root of your system. Use the command_ `mkdir -p/mnt/boot/efi` _to create the folder that will be mounted next._** _Finally,_ **_use_ `mount/dev/sda1/mnt/boot/efi` _to mount the boot partition in its proper place._**
 
@@ -112,6 +112,8 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
 </details>
 
+> If you have finished these stages, go to step 5.
+
 ## 5. Installation of the base <a name="base-install"></a>
 **1 - Update the Mirrors:** _We will use Reflector, which is a tool that serves to choose and organize the best mirrors (servers) for you to download the packages. For this,_ **_we will use the command_ `reflector --country [Your country] --latest 20 --sort rate --verbose --save/etc/pacman.d/mirrorlist`_. Once the program runs, the mirrors will already be up to date._**
 > **Example: `reflector --country Brazil --latest 20 --sort rate --verbose --save /etc/pacman.d/mirrorlist`**
@@ -120,7 +122,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
 **3 - Generate assembly configuration file: _Using_ `genfstab -U/mnt >> /mnt/etc/fstab` _to create the automatic assembly file of the parts._**
 
-> If you have finished these stages, go to step 5.
+> If you have finished these stages, go to step 6.
 
 ## 6. Initial System Settings <a name="iss"></a>
 > **Now that the base files have been installed, we need to "get inside" your new system to configure it from the inside. To do this, we will use the command `arch-chroot /mnt` and voila: we are inside the system. Inside co `chroot`, we will follow with the settings.**
@@ -160,7 +162,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
     [multilib]
     include = /etc/pacman.d/mirrorlist
 
-_then_ **_use the shortcut CTRL+O to save the file, press Enter and the shortcut CTRL+X to exit the NANO._**
+_then_ **_use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X._**
 
 **3 - Location, Keyboard and Hostname: _We will use the command_ `ln -sf/usr/share/zoneinfo/[your continent]/[your city] /etc/localtime`** _— in my case,_ `ln -sf/usr/share/zoneinfo/America/Sao_Paulo/etc/localtime` _— and,_ **_then the command_ `hwclock --systohc` _to synchronize the system time with that of your region._**
 > **Tip: Note that on the way to the city, if the name is compound (like São Paulo), you should use the underline (`_`) instead of space.**
@@ -178,10 +180,23 @@ _We will also use the_ **_command_ `nano/etc/locale.gen` _to open the_ file `loc
 
     pt_BR.UTF-8 UTF-8
 
-_Then_ **_use the shortcut CTRL+O to save the file, press Enter and the shortcut CTRL+X to exit the NANO. Next, we will use the_ `locale-gen` _command to generate the previously uncommented languages._**
+_Then_ **_use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X. Next, we will use the_ `locale-gen` _command to generate the previously uncommented languages._**
 > **Note: You can download more than one language, but you will only have to choose one to be displayed as the main one.**
 
-**_Now we will apply the chosen main language to the system using the command_ `echo "LANG=[your language]" > /etc/locale.conf`.** _In my case, the command is_ `echo "LANG=en_US.UTF-8" > /etc/locale.conf`_, but it could also be_ `echo "LANG=pt_BR.UTF-8" > /etc/locale.conf`_._
+_Now we will_ **_apply the chosen main language to the system using the command_ `echo "LANG=[your language]" > /etc/locale.conf`.** _In my case, the command is_ `echo "LANG=en_US.UTF-8" > /etc/locale.conf`_, but it could also be_ `echo "LANG=pt_BR.UTF-8" > /etc/locale.conf`_._
 > **Note: Remember that the language you put here must be the same as the one you uncommented in the previous step inside the locale.gen file.**
 
-Depois disso, iremos configurar o layout do teclado e colocar um nome para o computador. Para adicionar o layout para o teclado usamos `echo "KEYMAP=[your layout]" > /etc/vconsole.conf`.** _In my case, the command is_ `echo "KEYMAP=br-abnt2" > /etc/vconsole.conf`_, but it could also be_ `echo "KEYMAP=us" > /etc/vconsole.conf`_._ Agora para o nome do computador usamos `echo "[name]" > /etc/hostname`, eu usarei `echo "secura" > /etc/hostname`.
+_After that, we will_ **_configure the keyboard layout and put a name for the computer. To add the layout for the keyboard we use_ `echo "KEYMAP=[your layout]" > /etc/vconsole.conf`.** _In my case, the command is_ `echo "KEYMAP=br-abnt2" > /etc/vconsole.conf`_, but it could also be_ `echo "KEYMAP=us" > /etc/vconsole.conf`_._
+
+_Now_ **_for the computer name we use_ `echo "[name]" > /etc/hostname`_,_** _I will use_ `echo "secura" > /etc/hostname`_._
+> **Note: The name you choose for the `hostname` is how your computer will appear on the network and terminal.**
+
+**4 - Configure the Bootloader:** _For GRUB configuration (downloaded in step 6.1 - Installing Essential Programs), we will perform custom adjustments the way I like GRUB._ **_Use the command_ `nano/etc/default/grub` _to access the configuration file_**_; locate the third line and_ **_change the value of_ `GRUB_TIMEOUT=5` _to_ `-1`_, resulting in_ `GRUB_TIMEOUT=-1`**_, so that the countdown is disabled and the system does not automatically start, so that we can choose which system we want to start._ **_If you intend to perform the dualboot, you will need to navigate to the last line of the file and uncomment the_ `GRUB_DISABLE_OS_PROBER=false` _option, removing the_ `#` _character. use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X._**
+
+_Then,_ **_install grub on the partition using the command_ `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB` _and generate the final configuration files using the command_ `grub-mkconfig -o/boot/grub/grub.cfg`_._**
+
+**5 - User Creation and Permissions:** _To proceed with system security, the next step is to define access credentials. First, it is necessary_ **_to configure a password for the administrator user (`root`) through the command_ `passwd`_; when you run it, the system will ask you to enter and confirm the desired password_** _(it is strongly recommended that this password be unique and different from the one that will be used in your personal account)._
+
+_Next,_ **_to create your user, we will use the command_ `useradd -m -g wheel -s/bin/bash [your_user]`** _— in my case, the command is `useradd -m -g wheel -s/bin/bash guihnxz`. Finally,_ **_to assign a password to this new user, use the command_ `passwd [your_user]`**_, which in my example would be_ `passwd guihnxz`_, remembering again to define a different combination than the one used for `root`._
+
+_Now,_ **_use the command_ `EDITOR=nano visudo` _to open the_ `sudoers` _file through the NANO editor (note to write EDITOR in capital letters). Use the shortcut CTRL+F to search for the_ `wheel`_term and remove the_ `#` _character _from the line_ `#%wheel ALL=(ALL:ALL) ALL`_._** _This change will allow your user to use the sudo command to gain administrator privileges by requesting the user's password before each run._
