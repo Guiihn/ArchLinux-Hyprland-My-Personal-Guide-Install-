@@ -37,11 +37,10 @@ In this step, we will focus on the **internal configuration of the system**. We 
 
 Finally, we will **activate services so that the system starts correctly** and we will **disassemble the live environment and restart the machine.**
 </details>
- 
----
 
 <h2><b> 📢 IMPORTANT NOTICE </h2></b>
 <h3><i>This tutorial is designed to be easy to understand and execute. However, to ensure successful installation and avoid system failures, it is essential that all instructions are strictly followed. Make sure you type the commands exactly as described, respecting spaces, capital letters, and special characters.</i></h3>
+
 ---
 # 🛠️ Step-by-Step Installation
 *Follow ALL sections below after completing the previous reading.*
