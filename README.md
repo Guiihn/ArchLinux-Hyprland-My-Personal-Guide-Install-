@@ -26,15 +26,21 @@ In this step, the focus will be on **organizing your disk** (HD or SSD). Let's *
 </details>
 
 <details>
-    <summary><b>5. Installation of the base </b></summary>
+    <summary><b>5. Installation of the Base </b></summary>
 
 Here we will **update the mirrors and also use `pacstrap` to install the Linux Kernel** and essential packages. Finally, let's **generate the fstab file with `genfstab` to remember and automatically mount the partitions** that you had previously mounted in step 4.
 </details>
 
 <details>
-    <summary><b>6. Initial system settings </b></summary>
+    <summary><b>6. Initial System Settings </b></summary>
 
-In this step, we will focus on the **internal configuration of the system**. We will **activate an important library called multilib, configure the time zone, location and language, download and configure the bootloader** (GRUB) so that the system starts correctly, and finally, we will **perform user creation with administrator privileges**.
+In this step, we will focus on the **internal configuration of the system**. We will **activate an important library called multilib, configure the time zone, location and language, download and configure the bootloader** (GRUB) so that the bootloader starts correctly, and finally, we will **perform user creation with administrator privileges**.
+</details> 
+
+<details>
+    <summary><b>7. Activate services and finish the installation </b></summary>
+
+Finally, we will **activate services so that the system starts correctly** and we will **disassemble the live environment and restart the machine.**
 </details> 
 
 ---
@@ -95,7 +101,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
 **3 - Split the Device: _Now, go to_ `New`_, a message will appear asking you to enter the desired size, write 1G_**_, press Enter,_ **_select_ `Type` _and choose the_ `EFI System` _option_** _(this will be the boot partition). Then,_ **_select_ `Free Space` _again using the down arrow, press_ `New` _again, and add a size for Swap_** _(auxiliary memory in case RAM runs out) — it's recommended to use the same amount of gigabytes of your RAM — press Enter,_ **_go to_ `Type`_, and select_ `Linux Swap`_._** _Then,_ **_select_ `Free Space` _again, click_ `New`_, select all remaining space and leave it in_ `Linux filesystem`_._** _As you do all this,_ **_go to_ `Write`**_, press Enter, and_ **_type_ `yes` _to save the changes_**_; to exit, simply_ **_go to_ `Quit` _and press Enter._**
 
-**4 - Prepare the Partitions: _Use_ `mkfs.ext4/dev/sda3` _to format the system root partition in EXT4. The command_ `mkswap/dev/sda2` _to format the partition_ `sda2` _as swap and the command_ `swapon/dev/sda2` _to activate swap._**
+**4 - Prepare the Partitions: _Use_ `mkfs.ext4/dev/sda3` _to format the system root partition in EXT4. Also use `mkfs.fat -F 32/dev/sda1` to format the boot partition. The command_ `mkswap/dev/sda2` _to format the partition_ `sda2` _as swap and the command_ `swapon/dev/sda2` _to activate swap._**
 
 **5 - Assembly: _Use the command_ `mount/dev/[your device]3 /mnt` _— i.e._ `mount/dev/sda3 /mnt` _— to mount the root of your system. Use the command_ `mkdir -p/mnt/boot/efi` _to create the folder that will be mounted next._** _Finally,_ **_use_ `mount/dev/sda1/mnt/boot/efi` _to mount the boot partition in its proper place._**
 
@@ -103,7 +109,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 <details>
     <summary><b>4.2 - BIOS</b></summary>
     
-**1 - Search for your disk:** _To partition your disk, we first_ **_need to know the name of the desired device. To do this, use the_ `lsblk` _command to display all storage devices present on your machine. Then look for the disk you will format:_** _if it is a HD or SATA SSD, it should appear as `vda` or `sda`; if it is an NVMe SSD, it will be something like `nvme0n1`._
+
 </details>
 
 ## 5. Installation of the base <a name="base-install"></a>
@@ -113,3 +119,69 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 **2 - Install the Linux kernel and essential packages: _Use the command_ `pacstrap /mnt base linux linux-firmware base-devel` _to install the system base and some additional necessary packages._**
 
 **3 - Generate assembly configuration file: _Using_ `genfstab -U/mnt >> /mnt/etc/fstab` _to create the automatic assembly file of the parts._**
+
+> If you have finished these stages, go to step 5.
+
+## 6. Initial System Settings <a name="iss"></a>
+> **Now that the base files have been installed, we need to "get inside" your new system to configure it from the inside. To do this, we will use the command `arch-chroot /mnt` and voila: we are inside the system. Inside co `chroot`, we will follow with the settings.**
+
+**1 - Installing Essential Programs: _We will install these fundamental programs for our installation on Arch:_**
+
+**- Network Manager: _Responsible for managing network connections and allowing us to connect to wifi (Wi-Fi and Ethernet)._**<br>
+**- Sudo: _Allows regular users to execute commands with administrator (root) privileges._**<br>
+**- Grub: _The bootloader that allows the operating system to start._**<br>
+**- Efi Boot Manager: _Tool to interact with and manage boot inputs in EFI/UEFI firmware._**<br>
+**- Os Prober: _Used by Grub to detect other operating systems (such as Windows) on disk. Just install os-prober if you are going to dualboot (two operating systems on the same machine)._**<br>
+**- Nano: _Plain text editor via terminal to edit configuration files._**<br>
+**- Kitty: _A modern, fast and highly customizable terminal emulator._**<br>
+**- Hyprland: _The Wayland-based windowing environment (Window Manager) that will be your graphical interface._**<br>
+**- Xorg Xwayland: _Ensures compatibility of legacy applications (X11) within the Wayland environment._**<br>
+**- Xdg Desktop Portal Hyprland: _Allows the Hyprland environment to communicate with applications (required for prints and screen sharing)._**<br>
+**- Mesa: _Open source drivers for graphics acceleration (essential for video operation)._**<br>
+**- Pipewire / Pipewire pulse: _Modern audio servers that manage the system's sound._**<br>
+**- Alsa Utils: _Set of basic tools for sound setup and testing._**<br>
+**- Fonts: _(Fira Code, Comfortaa, Emoji): Packages of letters and icons necessary for the system to display text and emojis correctly._**<br>
+**- Ly: _A lightweight and minimalist login manager (Display Manager) for you to enter your password when turning on your PC._**<br>
+
+> **It's worth remembering that you have 100% freedom to choose your own programs. Since this tutorial reflects the way I like to configure my system, we will use these packages, but feel free to exchange them if you feel it is necessary.**
+
+**Command:**
+
+> **First, use `pacman -Syu` to update the entire system before installing the applications. Finally, use the --noconfirm parameter to automatically answer YES if you want to proceed with the installation. Don't forget to put the program names all in detail and with a dash (-) so that there are no errors during installation.**
+
+    pacman -S networkmanager sudo grub efibootmgr os-prober nano kitty hyprland xorg-xwayland xdg-desktop-portal-hyprland mesa pipewire pipewire-pulse alsa-utils ttf-fira-code ttf-comfortaa noto-fonts-emoji ly --noconfirm
+
+**2 - Activate Important Library: _Run the_ `nano/etc/pacman.conf` _command to open the_ `pacman.conf`** _file with the NANO text editor. With the file open_ **_use CTRL+F to search for_ `multilib`_, remove the_ `#` _from lines containing:_**
+
+    #[multilib]
+    #include = /etc/pacman.d/mirrorlist
+**_At the end:_**
+
+    [multilib]
+    include = /etc/pacman.d/mirrorlist
+
+_then_ **_use the shortcut CTRL+O to save the file, press Enter and the shortcut CTRL+X to exit the NANO._**
+
+**3 - Location, Keyboard and Hostname: _We will use the command_ `ln -sf/usr/share/zoneinfo/[your continent]/[your city] /etc/localtime`** _— in my case,_ `ln -sf/usr/share/zoneinfo/America/Sao_Paulo/etc/localtime` _— and,_ **_then the command_ `hwclock --systohc` _to synchronize the system time with that of your region._**
+> **Tip: Note that on the way to the city, if the name is compound (like São Paulo), you should use the underline (`_`) instead of space.**
+
+_We will also use the_ **_command_ `nano/etc/locale.gen` _to open the_ file `locale.gen`**_. In it,_ **_we will uncomment the system language by removing the # from the desired language_**_._ **_Use the CTRL+F shortcut to search for your language_** _— for example,_ **`en_US` _or_ `pt_BR`** _— and_ **_remove o_ `#` _from the lines containing your language_**_, as in the example below:_
+
+    #en_US.UTF-8 UTF-8
+**_or_**
+
+    #pt_BR.UTF-8 UTF-8
+**_At the end:_**
+
+    en_US.UTF-8 UTF-8
+**_or_**
+
+    pt_BR.UTF-8 UTF-8
+
+_Then_ **_use the shortcut CTRL+O to save the file, press Enter and the shortcut CTRL+X to exit the NANO. Next, we will use the_ `locale-gen` _command to generate the previously uncommented languages._**
+> **Note: You can download more than one language, but you will only have to choose one to be displayed as the main one.**
+
+**_Now we will apply the chosen main language to the system using the command_ `echo "LANG=[your language]" > /etc/locale.conf`.** _In my case, the command is_ `echo "LANG=en_US.UTF-8" > /etc/locale.conf`_, but it could also be_ `echo "LANG=pt_BR.UTF-8" > /etc/locale.conf`_._
+> **Note: Remember that the language you put here must be the same as the one you uncommented in the previous step inside the locale.gen file.**
+
+Depois disso, iremos configurar o layout do teclado e colocar um nome para o computador. Para adicionar o layout para o teclado usamos `echo "KEYMAP=[your layout]" > /etc/vconsole.conf`.** _In my case, the command is_ `echo "KEYMAP=br-abnt2" > /etc/vconsole.conf`_, but it could also be_ `echo "KEYMAP=us" > /etc/vconsole.conf`_._ Agora para o nome do computador usamos `echo "[name]" > /etc/hostname`, eu usarei `echo "secura" > /etc/hostname`.
