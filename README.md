@@ -101,9 +101,9 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
 **3 - Split the Device: _Now, go to_ `New`_, a message will appear asking you to enter the desired size, write 1G_**_, press Enter,_ **_select_ `Type` _and choose the_ `EFI System` _option_** _(this will be the boot partition). Then,_ **_select_ `Free Space` _again using the down arrow, press_ `New` _again, and add a size for Swap_** _(auxiliary memory in case RAM runs out) — it's recommended to use the same amount of gigabytes of your RAM — press Enter,_ **_go to_ `Type`_, and select_ `Linux Swap`_._** _Then,_ **_select_ `Free Space` _again, click_ `New`_, select all remaining space and leave it in_ `Linux filesystem`_._** _As you do all this,_ **_go to_ `Write`**_, press Enter, and_ **_type_ `yes` _to save the changes_**_; to exit, simply_ **_go to_ `Quit` _and press Enter._**
 
-**4 - Prepare the Partitions: _Use_ `mkfs.ext4/dev/sda3` _to format the system root partition in EXT4. Also use `mkfs.fat -F 32/dev/sda1` to format the boot partition (If you are going to do dualboot, do not do this formatting). The command_ `mkswap/dev/sda2` _to format the partition_ `sda2` _as swap and the command_ `swapon/dev/sda2` _to activate swap._**
+**4 - Prepare the Partitions: _Use_ `mkfs.ext4/dev/sda3` _to format the system_ `root` _partition in EXT4. Also use `mkfs.fat -F 32/dev/sda1` to format the boot partition (If you are going to do dualboot, do not do this formatting). The command_ `mkswap/dev/sda2` _to format the partition_ `sda2` _as swap and the command_ `swapon/dev/sda2` _to activate swap._**
 
-**5 - Assembly: _Use the command_ `mount/dev/[your device]3 /mnt` _— i.e._ `mount/dev/sda3 /mnt` _— to mount the root of your system. Use the command_ `mkdir -p/mnt/boot/efi` _to create the folder that will be mounted next._** _Finally,_ **_use_ `mount/dev/sda1/mnt/boot/efi` _to mount the boot partition in its proper place._**
+**5 - Assembly: _Use the command_ `mount/dev/[your device]3 /mnt` _— i.e._ `mount/dev/sda3 /mnt` _— to mount the_ `root` _of your system. Use the command_ `mkdir -p/mnt/boot/efi` _to create the folder that will be mounted next._** _Finally,_ **_use_ `mount/dev/sda1/mnt/boot/efi` _to mount the boot partition in its proper place._**
 
 </details>
 <details>
@@ -130,7 +130,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 **1 - Installing Essential Programs: _We will install these fundamental programs for our installation on Arch:_**
 
 **- Network Manager: _Responsible for managing network connections and allowing us to connect to wifi (Wi-Fi and Ethernet)._**<br>
-**- Sudo: _Allows regular users to execute commands with administrator (root) privileges._**<br>
+**- Sudo: _Allows regular users to execute commands with administrator (_`root`_) privileges._**<br>
 **- Grub: _The bootloader that allows the operating system to start._**<br>
 **- Efi Boot Manager: _Tool to interact with and manage boot inputs in EFI/UEFI firmware._**<br>
 **- Os Prober: _Used by Grub to detect other operating systems (such as Windows) on disk. Just install os-prober if you are going to dualboot (two operating systems on the same machine)._**<br>
@@ -197,6 +197,6 @@ _Then,_ **_install grub on the partition using the command_ `grub-install --targ
 
 **5 - User Creation and Permissions:** _To proceed with system security, the next step is to define access credentials. First, it is necessary_ **_to configure a password for the administrator user (`root`) through the command_ `passwd`_; when you run it, the system will ask you to enter and confirm the desired password_** _(it is strongly recommended that this password be unique and different from the one that will be used in your personal account)._
 
-_Next,_ **_to create your user, we will use the command_ `useradd -m -g wheel -s/bin/bash [your_user]`** _— in my case, the command is `useradd -m -g wheel -s/bin/bash guihnxz`. Finally,_ **_to assign a password to this new user, use the command_ `passwd [your_user]`**_, which in my example would be_ `passwd guihnxz`_, remembering again to define a different combination than the one used for `root`._
+_Next,_ **_to create your user, we will use the command_ `useradd -m -g wheel -s/bin/bash [your_user]`** _— in my case, the command is_ `useradd -m -g wheel -s/bin/bash guihnxz`_. Finally,_ **_to assign a password to this new user, use the command_ `passwd [your_user]`**_, which in my example would be_ `passwd guihnxz`_, remembering again to define a different combination than the one used for_ `root`_._
 
-_Now,_ **_use the command_ `EDITOR=nano visudo` _to open the_ `sudoers` _file through the NANO editor (note to write EDITOR in capital letters). Use the shortcut CTRL+F to search for the_ `wheel`_term and remove the_ `#` _character _from the line_ `#%wheel ALL=(ALL:ALL) ALL`_._** _This change will allow your user to use the sudo command to gain administrator privileges by requesting the user's password before each run._
+_Now,_ **_use the command_ `EDITOR=nano visudo` _to open the_ `sudoers` _file through the NANO editor (note to write EDITOR in capital letters). Use the shortcut CTRL+F to search for the_ `wheel`_term and remove the_ `#` _character from the line_ `#%wheel ALL=(ALL:ALL) ALL`_._** _This change will allow your user to use the sudo command to gain administrator privileges by requesting the user's password before each run._
