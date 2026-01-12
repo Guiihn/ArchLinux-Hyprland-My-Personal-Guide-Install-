@@ -1,6 +1,8 @@
 
 # Meu Guia de Instalação do Arch Linux com Hyprland
-> Este repositório contém **MEU guia personalizado de instalação e configuração desta distribuição. O foco desta configuração é o minimalismo e a performance**, instalando apenas os pacotes essenciais **para um ambiente de trabalho fluido**, evitando o bloatware (pacotes desnecessários) de instalações padrões.
+> Este repositório contém **MEU guia personalizado de instalação e configuração desta distribuição. O foco desta configuração é o minimalismo e a performance**, instalando apenas os pacotes essenciais **para um ambiente de trabalho fluido**, evitando o bloatware (pacotes desnecessários) de instalações padrão.
+
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
 <i>Esses são os passos que seguiremos:</i></h4>
 <details>
@@ -205,5 +207,5 @@ _Now,_ **_use the command_ `EDITOR=nano visudo` _to open the_ `sudoers` _file th
 ## 7 - Activate Services and Finish the Installation <a name="final"></a>
 **1 - Activate Services:** _For the system to operate correctly after restarting, it is necessary to enable two essential services so that they start automatically. First,_ **_activate the Network Manager service with the command_ `systemctl enable NetworkManager`**_, ensuring that Wi-Fi can be configured properly. Then,_ **_enable the Ly service_** _(the Display Manager installed in step 6.1)_ **_using the command_ `systemctl enable ly.service`_, so that the login interface is loaded instead of just the default terminal._**
 
-# The End
-## That's it, your system is usable and has the basics set up for you to customize as you wish. It wasn't that bad, was it? lol
+# Fim
+## Pronto, seu sistema é utilizável e tem o básico configurado para você personalizar como desejar. Não foi assim tão ruim assim né? Rsrs
