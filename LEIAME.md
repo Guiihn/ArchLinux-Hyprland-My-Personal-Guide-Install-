@@ -1,6 +1,6 @@
 
 # Meu Guia de Instalação do Arch Linux com Hyprland
-> Esse é o **MEU** guia de instalação dessa distro com **MINHAS configurações**.
+> Este repositório contém **MEU guia personalizado de instalação e configuração desta distribuição. O foco desta configuração é o minimalismo e a performance**, instalando apenas os pacotes essenciais **para um ambiente de trabalho fluido**, evitando o bloatware (pacotes desnecessários) de instalações padrões.
 
 Esses são os passos que seguiremos:</i></h4>
 <details>
@@ -92,7 +92,7 @@ _Pra resolver esse erro, você precisa_ **_abrir e editar o arquivo_ `resolv.con
 **4 - Corrigir as Keyrings:** _A utilidade principal delas é garantir que os pacotes que você baixa são oficiais e não foram alterados por hackers. Pra isso, precisamos_ **_remover as keyrings antigas usando o comando_ `rm -rf/etc/pacman.d/gnupg`.** _Agora, vamos_ **_iniciar as novas keyrings com os comandos_ `pacman-key --init` _e_ `pacman-key --populate archlinux` _para carregar essas keyrings. Em seguida, use o comando_ `pacman -Sy archlinux-keyring --noconfirm` _para atualizar o pacote de keyrings_**_, baixando-o diretamente dos servidores Arch._
 > Se tiver terminado aqui, passe pro estágio quatro.
 
-## 4. Disk Partitioning <a name="partitioning"></a>
+## 4. Particionamento <a name="partitioning"></a>
 > **Antes de particionarmos o disco, precisamos saber se seu computador inicia no modo UEFI ou no modo BIOS (Legacy). Para isso, usaremos o comando `ls/sys/firmware/efi/` para saber se o sistema está no modo UEFI. Se o comando retornar alguns nomes de pastas, o modo UEFI estará ativo. Se não retornar nada, está no modo BIOS (Legacy). Com esses dados você pode prosseguir para o tutorial sobre seu modo de inicialização.**
 <details>
     <summary><b>4.1 - UEFI</b></summary>
