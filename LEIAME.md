@@ -2,40 +2,40 @@
 # Meu Guia de Instalação do Arch Linux com Hyprland
 > Este repositório contém **MEU guia personalizado de instalação e configuração desta distribuição. O foco desta configuração é o minimalismo e a performance**, instalando apenas os pacotes essenciais **para um ambiente de trabalho fluido**, evitando o bloatware (pacotes desnecessários) de instalações padrões.
 
-Esses são os passos que seguiremos:</i></h4>
+<i>Esses são os passos que seguiremos:</i></h4>
 <details>
-    <summary><b><i>1. Preparação </i></b></summary>
+    <summary><b>1. Preparação </b></summary>
 
-<i>Nessa parte, vamos focar em preparar o ambiente para **baixar a ISO**, **preparar o pendrive bootável**, **baixar o Ventoy** (o programa que será **usado para criar o pendrive bootável**) e depois **criar o pendrive bootável**.</i>
+Nessa parte, vamos focar em preparar o ambiente para **baixar a ISO**, **preparar o pendrive bootável**, **baixar o Ventoy** (o programa que será **usado para criar o pendrive bootável**) e depois **criar o pendrive bootável**.
 </details>
 <details>
-    <summary><b><i>2. Configuração da BIOS </i></b></summary>
+    <summary><b>2. Configuração da BIOS </b></summary>
 
 **Apenas colocaremos o pendrive pra iniciar primeiro que qualquer sistema.**
 </details>
 <details>
-    <summary><b><i>3. Configuração básica do ambiente Live </i></b></summary>
+    <summary><b>3. Configuração básica do ambiente Live </b></summary>
 
 Nesta etapa faremos algumas **configurações básicas no ambiente Live**. Essas configurações serão para **configurar o layout do teclado, internet, sincronizar o relógio e a correção do chaveiro.**
 Nesse passo, faremos somente algumas **configurações básicas no ambiente Live da ISO**. Essas configurações serão pra **configurar o layout do teclado, configurar a internet, sincronizar o relógio e corrigir possiveis erros de `keyring`.**
 </details>
 <details>
-    <summary><b><i>4. Particionamento do disco </i></b></summary>
+    <summary><b>4. Particionamento do disco </b></summary>
 
 Agora, o foco será **organizar o disco** (HD ou SSD). Vamos **decidir como o espaço será dividido, definindo a partição de `boot` para o sistema iniciar, a partição de `swap`** (memória auxiliar) para ajudar o computador quando ele estiver sobrecarregado, **e a partição `root`, que é a partição principal** onde todos os arquivos e o sistema operacional serão armazenados.
 </details>
 <details>
-    <summary><b><i>5. Instalação da base </i></b></summary>
+    <summary><b>5. Instalação da base </b></summary>
 
 Aqui, **atualizaremos os espelhos e também usaremos `pacstrap` para instalar o Kernel Linux** e alguns pacotes essenciais. Por fim, vamos **gerar o arquivo `fstab` com o comando `genfstab` para lembrar e montar automaticamente as partições** que você havia montado anteriormente manualmente na etapa 4.
 </details>
 <details>
-    <summary><b><i>6. Configurações iniciais do sistema </i></b></summary>
+    <summary><b>6. Configurações iniciais do sistema </b></summary>
 
 Após a instalação, vamos nos concentrar na **configuração interna do sistema. Pra isso precisaremos ativar uma biblioteca importante chamada `multilib`, vamos configurar o fuso horário, o local, o idioma, o nome do computador (`hostname`). Baixaremos e configuraremos o bootloader** (GRUB) para que ele inicie corretamente e, finalmente, **criaremos o usuário com privilégios de administrador**.
 </details> 
 <details>
-    <summary><b><i>7. Activate Services and Finish the Installation </i></b></summary>
+    <summary><b>7. Activate Services and Finish the Installation </b></summary>
 
 Por fim, **ativaremos dois serviços para que o sistema inicie corretamente** e **desmontaremos o ambiente Live e reiniciaremos a máquina.**
 </details> 
