@@ -6,6 +6,7 @@ These will be the paths we will follow:</i></h3>
 
 In this step, we will focus on preparing the environment for **downloading the ISO**, **prepare your bootable USB stick**, **downloading Ventoy** (the program that will be **used to create the bootable USB stick**) and then **creating the bootable USB stick**.
 </details>
+
 <details>
     <summary><b><i>2. BIOS/UEFI Setup </i></b></summary>
 
@@ -17,26 +18,32 @@ In this step, we will focus on preparing the environment for **downloading the I
 
 In this stage we will do some **basic configurations in the Live environment**. These settings will be to **configure keyboard layout, internet, synchronize the clock and keyring correction.**
 </details>
+
 <details>
     <summary><b><i>4. Disk Partitioning </i></b></summary>
 
 In this step, the focus will be on **organizing your disk** (HD or SSD). Let's **decide how the space will be divided, defining the boot partition for the system to start, the swap partition** (auxiliary memory) to help the computer when it is overloaded, **and the main partition** where all the files and the operating system will be stored.
 </details>
+
 <details>
     <summary><b><i>5. Installation of the Base </i></b></summary>
 
 Here we will **update the mirrors and also use `pacstrap` to install the Linux Kernel** and essential packages. Finally, let's **generate the fstab file with `genfstab` to remember and automatically mount the partitions** that you had previously mounted in step 4.
 </details>
+
 <details>
     <summary><b><i>6. Initial System Settings </i></b></summary>
 
 In this step, we will focus on the **internal configuration of the system**. We will **activate an important library called multilib, configure the time zone, location, language and hostname, download and configure the bootloader** (GRUB) so that it starts correctly, and finally, we will **perform user creation with administrator privileges**.
 </details> 
+
 <details>
     <summary><b><i>7. Activate Services and Finish the Installation </i></b></summary>
 
 Finally, we will **activate services so that the system starts correctly** and we will **disassemble the live environment and restart the machine.**
-</details>
+</details> 
+
+---
 
 <h2><b> 📢 IMPORTANT NOTICE </h2></b>
 <h3><i>This tutorial is designed to be easy to understand and execute. However, to ensure successful installation and avoid system failures, it is essential that all instructions are strictly followed. Make sure you type the commands exactly as described, respecting spaces, capital letters, and special characters.</i></h3>
@@ -55,8 +62,6 @@ Finally, we will **activate services so that the system starts correctly** and w
 **4 - Create the Installation Pendrive: _Just follow this_ [3 minute tutorial](https://www.youtube.com/watch?v=3HVAM1M3fQU) _to create the bootable USB stick._**
 > If you have finished these stages, go to step 2.
 
----
-
 ## 2. BIOS Configuration <a name="bios"></a>
 **1 - Access the BIOS/UEFI:** _Now, let's **restart the computer. Once it starts turning on, keep pressing the setup key (usually F2 or Delete)** until it opens a different screen._
 
@@ -68,7 +73,7 @@ Finally, we will **activate services so that the system starts correctly** and w
 
 > If the terminal source is small use the command `setfont ter-132b` to increase the size of the letters.
 
-**1 - Configure Keyboard:** _The first thing to do is **set up the keyboard so that the keys you press come out correctly on the screen (like the / or - sign). If your keyboard has the Ç key, it is the Brazilian standard (br-abnt2). If he doesn't, he's usually the American (us).**_ _Enter the command that **corresponds to your keyboard model using the command:**_ *`loadkeys (your model)`. _That is_ `loadkeys br-abnt2` _or_ `loadkeys us`.**
+**1 - Configure Keyboard:** _The first thing to do is **set up the keyboard so that the keys you press come out correctly on the screen (like the / or - sign). If your keyboard has the Ç key, it is the Brazilian standard (br-abnt2). If he doesn't, he's usually the American (us).**_ _Enter the command that **corresponds to your keyboard model using the command:**_ **`loadkeys (your model)`. _That is_ `loadkeys br-abnt2` _or_ `loadkeys us`.**
 
 > If you connect your computer to the internet via cable, you don't need to do this next step.
 
@@ -80,20 +85,18 @@ Finally, we will **activate services so that the system starts correctly** and w
 
 <details>
     <summary><i>DNS Resolution</i></summary>
-_To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X.**_
 
+_To resolve this error, we need to **open and edit the resolv.conf file with the NANO text editor**, which is already installed by default in this Live environment. **We will use the `nano/etc/resolv.conf` command to open the file. Then delete everything in it and type `nameserver 1.1.1.1`, press Enter to go to the bottom line and also type `nameserver 8.8.8.8`. Use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X.**_
 > Test again using `ping -c 3 google.com`, if it returns in milliseconds, everything is fine.
 </details><br>
 
 **3 - Environment Clock: _For the installation to go properly, we need to synchronize the clock and live environment with global standard time, for this we will only use the_ `timedatectl set-ntp true` _command._**
 
 **4 - Keyring Correction:** _First, we need to_ **_remove the old keyrings using the command_ `rm -rf/etc/pacman.d/gnupg`.** _Now, let's_ **_start the new keyrings with the_ `pacman-key --init` _and_ `pacman-key --populate archlinux` _commands to load these keys. Then use the command_ `pacman -Sy archlinux-keyring --noconfirm` _to update the keyring package_**_, downloading it directly from Arch servers._
-
 > If you have finished these stages, go to step 4.
 
 ## 4. Disk Partitioning <a name="partitioning"></a>
 > **Before we partition your disk, we need to know your computer starts in UEFI mode or BIOS (Legacy) mode. To do this, we will use the command `ls/sys/firmware/efi/` to know if the system is in UEFI mode. If the command returns some folder names, UEFI mode is active. If it doesn't return anything, it's in BIOS (Legacy). With this data you can proceed to the tutorial regarding its initialization mode.**
-
 <details>
     <summary><b>4.1 - UEFI</b></summary>
 
@@ -106,8 +109,8 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 **4 - Prepare the Partitions: _Use_ `mkfs.ext4/dev/sda3` _to format the system_ `root` _partition in EXT4. Also use `mkfs.fat -F 32/dev/sda1` to format the boot partition (If you are going to do dualboot, do not do this formatting). The command_ `mkswap/dev/sda2` _to format the partition_ `sda2` _as swap and the command_ `swapon/dev/sda2` _to activate swap._**
 
 **5 - Assembly: _Use the command_ `mount/dev/[your device]3 /mnt` _— i.e._ `mount/dev/sda3 /mnt` _— to mount the_ `root` _of your system. Use the command_ `mkdir -p/mnt/boot/efi` _to create the folder that will be mounted next._** _Finally,_ **_use_ `mount/dev/sda1/mnt/boot/efi` _to mount the boot partition in its proper place._**
-</details>
 
+</details>
 <details>
     <summary><b>4.2 - BIOS</b></summary>
     
@@ -117,7 +120,6 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
 ## 5. Installation of the base <a name="base-install"></a>
 **1 - Update the Mirrors:** _We will use Reflector, which is a tool that serves to choose and organize the best mirrors (servers) for you to download the packages. For this,_ **_we will use the command_ `reflector --country [Your country] --latest 20 --sort rate --verbose --save/etc/pacman.d/mirrorlist`_. Once the program runs, the mirrors will already be up to date._**
-
 > **Example: `reflector --country Brazil --latest 20 --sort rate --verbose --save /etc/pacman.d/mirrorlist`**
 
 **2 - Install the Linux kernel and essential packages: _Use the command_ `pacstrap /mnt base linux linux-firmware base-devel` _to install the system base and some additional necessary packages._**
@@ -132,7 +134,7 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 **1 - Installing Essential Programs: _We will install these fundamental programs for our installation on Arch:_**
 
 **- Network Manager: _Responsible for managing network connections and allowing us to connect to wifi (Wi-Fi and Ethernet)._**<br>
-**- Sudo: _Allows regular users to execute commands with administrator (`root`_) privileges._**<br>
+**- Sudo: _Allows regular users to execute commands with administrator (_`root`_) privileges._**<br>
 **- Grub: _The bootloader that allows the operating system to start._**<br>
 **- Efi Boot Manager: _Tool to interact with and manage boot inputs in EFI/UEFI firmware._**<br>
 **- Os Prober: _Used by Grub to detect other operating systems (such as Windows) on disk. Just install os-prober if you are going to dualboot (two operating systems on the same machine)._**<br>
@@ -159,19 +161,6 @@ _To resolve this error, we need to **open and edit the resolv.conf file with the
 
     #[multilib]
     #include = /etc/pacman.d/mirrorlist
-
-**_At the end:_**
-
-    [multilib]
-    include = /etc/pacman.d/mirrorlist
-
-_then_ **_use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X._**
-
-**2 - Activate Important Library: _Run the_ `nano/etc/pacman.conf` _command to open the_ `pacman.conf`** _file with the NANO text editor. With the file open_ **_use CTRL+F to search for_ `multilib`_, remove the_ `#` _from lines containing:_**
-
-    #[multilib]
-    #include = /etc/pacman.d/mirrorlist
-
 **_At the end:_**
 
     [multilib]
@@ -180,48 +169,42 @@ _then_ **_use CTRL+O to save the file (confirm with Enter) and, to exit NANO, pr
 _then_ **_use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X._**
 
 **3 - Location, Keyboard and Hostname: _We will use the command_ `ln -sf/usr/share/zoneinfo/[your continent]/[your city] /etc/localtime`** _— in my case,_ `ln -sf/usr/share/zoneinfo/America/Sao_Paulo/etc/localtime` _— and,_ **_then the command_ `hwclock --systohc` _to synchronize the system time with that of your region._**
-
 > **Tip: Note that on the way to the city, if the name is compound (like São Paulo), you should use the underline (`_`) instead of space.**
 
-_We will also use the_ **_command_ `nano/etc/locale.gen` _to open the_ file `locale.gen`**_. In it,_ **_we will uncomment the system language by removing the # from the desired language_**_._ **_Use the CTRL+F shortcut to search for your language_** _— for example,_ *`en_US` _or_ `pt_BR`** _— and_ **_remove o_ `#` _from the lines containing your language_**_, as in the example below:_
+_We will also use the_ **_command_ `nano/etc/locale.gen` _to open the_ file `locale.gen`**_. In it,_ **_we will uncomment the system language by removing the # from the desired language_**_._ **_Use the CTRL+F shortcut to search for your language_** _— for example,_ **`en_US` _or_ `pt_BR`** _— and_ **_remove o_ `#` _from the lines containing your language_**_, as in the example below:_
 
     #en_US.UTF-8 UTF-8
-
 **_or_**
 
     #pt_BR.UTF-8 UTF-8
-
 **_At the end:_**
 
     en_US.UTF-8 UTF-8
-
 **_or_**
 
     pt_BR.UTF-8 UTF-8
 
 _Then_ **_use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X. Next, we will use the_ `locale-gen` _command to generate the previously uncommented languages._**
-
 > **Note: You can download more than one language, but you will only have to choose one to be displayed as the main one.**
 
 _Now we will_ **_apply the chosen main language to the system using the command_ `echo "LANG=[your language]" > /etc/locale.conf`.** _In my case, the command is_ `echo "LANG=en_US.UTF-8" > /etc/locale.conf`_, but it could also be_ `echo "LANG=pt_BR.UTF-8" > /etc/locale.conf`_._
-
 > **Note: Remember that the language you put here must be the same as the one you uncommented in the previous step inside the locale.gen file.**
 
 _After that, we will_ **_configure the keyboard layout and put a name for the computer. To add the layout for the keyboard we use_ `echo "KEYMAP=[your layout]" > /etc/vconsole.conf`.** _In my case, the command is_ `echo "KEYMAP=br-abnt2" > /etc/vconsole.conf`_, but it could also be_ `echo "KEYMAP=us" > /etc/vconsole.conf`_._
 
 _Now_ **_for the computer name we use_ `echo "[name]" > /etc/hostname`_,_** _I will use_ `echo "secura" > /etc/hostname`_._
-
 > **Note: The name you choose for the `hostname` is how your computer will appear on the network and terminal.**
 
-**4 - Configure the Bootloader:** _For GRUB configuration (downloaded in step 6.1 - Installing Essential Programs), we will perform custom adjustments the way I like GRUB._ **_Use the command_ `nano/etc/default/grub` _to access the configuration file_**_; locate the third line and_ **_change the value of_ `GRUB_TIMEOUT=5` _to_ `-1`_, resulting in_ `GRUB_TIMEOUT=-1`**_, so that the countdown is disabled and the system does not automatically start, so that we can choose which system we want to start._ **_If you intend to perform the dualboot, you will need to navigate to the last line of the file and uncomment the_ `GRUB_DISABLE_OS_PROBER=false` _option, removing the_ `#` _character. Use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X._**
+**4 - Configure the Bootloader:** _For GRUB configuration (downloaded in step 6.1 - Installing Essential Programs), we will perform custom adjustments the way I like GRUB._ **_Use the command_ `nano/etc/default/grub` _to access the configuration file_**_; locate the third line and_ **_change the value of_ `GRUB_TIMEOUT=5` _to_ `-1`_, resulting in_ `GRUB_TIMEOUT=-1`**_, so that the countdown is disabled and the system does not automatically start, so that we can choose which system we want to start._ **_If you intend to perform the dualboot, you will need to navigate to the last line of the file and uncomment the_ `GRUB_DISABLE_OS_PROBER=false` _option, removing the_ `#` _character. use CTRL+O to save the file (confirm with Enter) and, to exit NANO, press CTRL+X._**
 
 _Then,_ **_install grub on the partition using the command_ `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB` _and generate the final configuration files using the command_ `grub-mkconfig -o/boot/grub/grub.cfg`_._**
 
-**5 - User Creation and Permissions:** _To proceed with system security, the next step is to define access credentials. First, it is necessary_ **_to configure a password for the administrator user `root`) through the command_ `passwd`_; when you run it, the system will ask you to enter and confirm the desired password_** _(it is strongly recommended that this password be unique and different from the one that will be used in your personal account)._
+**5 - User Creation and Permissions:** _To proceed with system security, the next step is to define access credentials. First, it is necessary_ **_to configure a password for the administrator user (`root`) through the command_ `passwd`_; when you run it, the system will ask you to enter and confirm the desired password_** _(it is strongly recommended that this password be unique and different from the one that will be used in your personal account)._
 
 _Next,_ **_to create your user, we will use the command_ `useradd -m -g wheel -s/bin/bash [your_user]`** _— in my case, the command is_ `useradd -m -g wheel -s/bin/bash guihnxz`_. Finally,_ **_to assign a password to this new user, use the command_ `passwd [your_user]`**_, which in my example would be_ `passwd guihnxz`_, remembering again to define a different combination than the one used for_ `root`_._
 
 _Now,_ **_use the command_ `EDITOR=nano visudo` _to open the_ `sudoers` _file through the NANO editor (note to write EDITOR in capital letters). Use the shortcut CTRL+F to search for the_ `wheel`_term and remove the_ `#` _character from the line_ `#%wheel ALL=(ALL:ALL) ALL`_._** _This change will allow your user to use the sudo command to gain administrator privileges by requesting the user's password before each run._
+
 
 ## 7 - Activate Services and Finish the Installation <a name="final"></a>
 **1 - Activate Services:** _For the system to operate correctly after restarting, it is necessary to enable two essential services so that they start automatically. First,_ **_activate the Network Manager service with the command_ `systemctl enable NetworkManager`**_, ensuring that Wi-Fi can be configured properly. Then,_ **_enable the Ly service_** _(the Display Manager installed in step 6.1)_ **_using the command_ `systemctl enable ly.service`_, so that the login interface is loaded instead of just the default terminal._**
